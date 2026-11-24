@@ -15,10 +15,15 @@ LINE = (
 )
 
 
+MAX_CHARS = 200
+
+
 def main() -> None:
     line = LINE
-    if not 1 <= len(line) <= 200:
-        raise ValueError(f"entry line is {len(line)} characters, must be 1-200")
+    if not 1 <= len(line) <= MAX_CHARS:
+        raise ValueError(f"entry line is {len(line)} characters, must be 1-{MAX_CHARS}")
+    if len(line.encode("utf-8")) > MAX_CHARS:
+        raise ValueError("entry line must fit the gate in bytes too")
     if not line.strip():
         raise ValueError("entry line must not be only whitespace")
     if line != line.strip():
